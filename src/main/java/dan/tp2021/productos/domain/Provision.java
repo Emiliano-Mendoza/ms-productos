@@ -1,11 +1,22 @@
 package dan.tp2021.productos.domain;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Provision {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Instant fechaProvision;
+	private Date fechaProvision;
+	@OneToMany(mappedBy = "provision")
 	private List<DetalleProvision> detalle;
 	
 	public Integer getId() {
@@ -14,11 +25,11 @@ public class Provision {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Instant getFechaProvision() {
+	public Date getFechaProvision() {
 		return fechaProvision;
 	}
-	public void setFechaProvision(Instant fechaProvision) {
-		this.fechaProvision = fechaProvision;
+	public void setFechaProvision(Date date) {
+		this.fechaProvision = date;
 	}
 	public List<DetalleProvision> getDetalle() {
 		return detalle;

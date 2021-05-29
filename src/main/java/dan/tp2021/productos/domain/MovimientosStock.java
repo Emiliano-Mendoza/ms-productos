@@ -7,7 +7,7 @@ public class MovimientosStock {
 	private Integer id;
 	private DetallePedido detallePedido;
 	private DetalleProvision detalleProvision;
-	private Material material;
+	private Producto producto;
 	private Integer cantidadEntrada;
 	private Integer cantidadSalida;
 	private Instant fecha;
@@ -30,11 +30,11 @@ public class MovimientosStock {
 	public void setDetalleProvision(DetalleProvision detalleProvision) {
 		this.detalleProvision = detalleProvision;
 	}
-	public Material getMaterial() {
-		return material;
+	public Producto getMaterial() {
+		return producto;
 	}
-	public void setMaterial(Material material) {
-		this.material = material;
+	public void setMaterial(Producto producto) {
+		this.producto = producto;
 	}
 	public Integer getCantidadEntrada() {
 		return cantidadEntrada;
