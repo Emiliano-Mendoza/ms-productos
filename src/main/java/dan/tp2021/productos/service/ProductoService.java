@@ -25,4 +25,7 @@ public interface ProductoService {
 
 	public ResponseEntity<String> actualizarStockProducto(Producto producto);
 
+	public List<Producto> getAllProductos();
+	
+	public void eliminarProducto(Integer id);
 }

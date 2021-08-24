@@ -171,4 +171,14 @@ public class ProductoServiceImpl implements ProductoService{
 		
 		return true;
 	}
+
+	@Override
+	public List<Producto> getAllProductos() {
+		return productoRepository.findAll();
+	}
+
+	@Override
+	public void eliminarProducto(Integer id) {
+		productoRepository.deleteById(id);
+	}
 }
