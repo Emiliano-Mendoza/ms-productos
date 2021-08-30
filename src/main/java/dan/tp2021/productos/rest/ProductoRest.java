@@ -3,6 +3,7 @@ package dan.tp2021.productos.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dan.tp2021.productos.domain.Producto;
 import dan.tp2021.productos.service.ProductoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -107,4 +111,29 @@ public class ProductoRest {
 		productoService.eliminarProducto(id);
 		return ResponseEntity.ok().build();
     }
+	
+	@PutMapping
+    @ApiOperation(value = "Actualiza un producto")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Actualizado correctamente"),
+        @ApiResponse(code = 401, message = "No autorizado"),
+        @ApiResponse(code = 403, message = "Prohibido"),
+        @ApiResponse(code = 404, message = "El ID no existe")
+    })
+    public ResponseEntity<ResponseEntity<Producto>> actualizar(@RequestBody Producto nuevo){
+        	
+        	//Producto producto = productoService.getById(nuevo.getId());
+			if(productoService.getById(nuevo.getId()) != null) {
+				try {
+	            	//Si se llama a crearCliente con el mismo id se reemplaza en la BD
+					return ResponseEntity.ok(productoService.crearProducto(nuevo));
+				} catch (Exception e) {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+				}
+			}
+			else {
+	            return ResponseEntity.notFound().build();
+	        }
+            
+	}
 }
